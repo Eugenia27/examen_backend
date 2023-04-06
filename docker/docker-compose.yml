@@ -1,0 +1,66 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'movie-dev'
+      MYSQL_USER: 'usr'
+      MYSQL_PASSWORD: 'pwd'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3308:3306'
+    expose:
+      - '3306'
+  mongo-series-container:
+    image: mongo
+    container_name: mongo-series-container
+    restart: on-failure
+    environment:
+      MONGO_INITDB_DATABASE: 'series-dev'
+      MONGO_INITDB_ROOT_USERNAME: 'usr'
+      MONGO_INITDB_ROOT_PASSWORD: 'pwd'
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  mongo-catalog-container:
+    image: mongo
+    container_name: mongo-catalog-container
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: 'catalog-dev'
+      MONGO_INITDB_ROOT_USERNAME: 'usr'
+      MONGO_INITDB_ROOT_PASSWORD: 'pwd'
+    ports:
+      - 27018:27017
+    expose:
+      - 27018
+    volumes:
+      - ./mongoinit.js:/docker-entrypoint-initdb.d/mongoinit.js:ro
+  zipkin-server-container:
+    image: openzipkin/zipkin-slim
+    container_name: zipkin-server-container
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      - "9411:9411"
+    expose:
+      - 9411
+    depends_on:
+      - storage-aux-container
+  storage-aux-container:
+    image: busybox:1.31.0
+    container_name: storage-aux-container
+  rabbitmq-container:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-container
+    hostname: localhost
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    expose:
+      - 15672
+      - 5672

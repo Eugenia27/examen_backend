@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "ab22b801-b3c0-4f2b-98fd-1a97f550c0f0",
+		"name": "ParcialBackend1Especializacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18756943"
+	},
+	"item": [
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Get Movies from catalog using port",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:61989/Comedia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "61989",
+							"path": [
+								"Comedia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movies from  catalog using getaway",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/catalog/Terror",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"Terror"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "Save movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": null,\r\n    \"name\": \"Tomb Raider\",\r\n    \"genre\": \"Accion\",\r\n    \"urlStream\": \"www.paramount.com\"\r\n}\r\n    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:62754/api/v1/movies/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "62754",
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
