@@ -9,7 +9,6 @@ import lombok.Setter;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class NewSerieEventProducer {
     //public void publishNewSerieEvent(NewSerieEventProducer.Message message) {
     public void publishNewSerieEvent(Serie serie) {
         //queue.publish(message)
-        Message message = new Message();
+        MessageSerie message = new MessageSerie();
         BeanUtils.copyProperties(serie, message);
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_NEW_SERIE, message);
     }
@@ -32,11 +31,11 @@ public class NewSerieEventProducer {
     @NoArgsConstructor
     @Setter
     @Getter
-    public class Message {
+    public static class MessageSerie {
 
         private String name;
         private String genre;
-        private List<com.dh.serie.model.Serie.Season> seasons = new ArrayList<>();
+        private List<Season> seasons = new ArrayList<>();
 
         @AllArgsConstructor
         @NoArgsConstructor
@@ -45,7 +44,7 @@ public class NewSerieEventProducer {
         public static class Season {
 
             private Integer seasonNumber;
-            private List<com.dh.serie.model.Serie.Season.Chapter> chapters = new ArrayList<>();
+            private List<Chapter> chapters = new ArrayList<>();
 
             @AllArgsConstructor
             @NoArgsConstructor

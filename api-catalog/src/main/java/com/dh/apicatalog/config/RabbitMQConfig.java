@@ -18,8 +18,9 @@ public class RabbitMQConfig {
     public static final String TOPIC_NEW_MOVIE = "com.dh.apimovie.newmovie";
     public static final String QUEUE_NEW_MOVIE = "queueNewMovie";
 
-    public static final String QUEUE_NEW_SERIE = "queueNewSerie";
     public static final String TOPIC_NEW_SERIE = "com.dh.apiserie.newserie";
+    public static final String QUEUE_NEW_SERIE = "queueNewSerie";
+
 
     @Bean
     public TopicExchange appExchange() {

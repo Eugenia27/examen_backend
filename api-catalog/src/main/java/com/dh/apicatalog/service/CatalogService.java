@@ -50,14 +50,14 @@ public class CatalogService {
         return catalog;
     }
 
-    public String createMovie(NewMovieEventConsumer.Message message) {
+    public String createMovie(NewMovieEventConsumer.MessageMovie message) {
         Movie movie = new Movie();
         BeanUtils.copyProperties(message, movie);
         movieRepository.save(movie);
         return movie.getId();
     }
 
-    public String createSerie(NewSerieEventConsumer.Message message) {
+    public String createSerie(NewSerieEventConsumer.MessageSerie message) {
         Serie serie = new Serie();
         BeanUtils.copyProperties(message, serie);
         serieRepository.save(serie);

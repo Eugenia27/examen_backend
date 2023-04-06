@@ -20,7 +20,7 @@ public class NewMovieEventProducer {
     //public void publishNewMovieEvent(NewMovieEventProducer.Message message) {
     public void publishNewMovieEvent(Movie movie) {
         //queue.publish(message)
-        Message message = new Message();
+        MessageMovie message = new MessageMovie();
         BeanUtils.copyProperties(movie, message);
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_NEW_MOVIE, message);
     }
@@ -29,7 +29,7 @@ public class NewMovieEventProducer {
     @NoArgsConstructor
     @Getter
     @Setter
-    public static class Message {
+    public static class MessageMovie {
         private String name;
         private String genre;
         private String urlStream;

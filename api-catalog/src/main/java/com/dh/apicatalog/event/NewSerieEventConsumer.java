@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class NewSerieEventConsumer {
 
     //subscription to message queue
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NEW_SERIE)
-    public void listenNewSerieEvent(NewSerieEventConsumer.Message message) {
+    public void listenNewSerieEvent(NewSerieEventConsumer.MessageSerie message) {
         System.out.println("We have a notification of a new serie with genre : " + message.genre);
         catalogService.createSerie(message);
     }
@@ -30,7 +29,7 @@ public class NewSerieEventConsumer {
     @NoArgsConstructor
     @Setter
     @Getter
-    public class Message {
+    public static class MessageSerie {
 
         private String name;
         private String genre;
