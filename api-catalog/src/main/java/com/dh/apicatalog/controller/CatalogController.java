@@ -25,18 +25,6 @@ public class CatalogController {
     @Autowired
     public CatalogService catalogService;
 
-    //@GetMapping
-    //public ResponseEntity<String> initController() {
-    //    return ResponseEntity.ok("Genial");
-    //}
-
-    //@GetMapping("/{genre}")
-    //public ResponseEntity<List<MovieServiceClient.MovieDTO>> getGenre(@PathVariable String genre, HttpServletResponse response) {
-    //   ResponseEntity<List<MovieServiceClient.MovieDTO>> moviesResponse = ResponseEntity.ok(movieServiceClient.getMovieByGenre(genre));
-    //   System.out.println("LOAD BALANCER SELECTED PORT: " + moviesResponse.getHeaders().get("port"));
-    //   return moviesResponse;
-    //}
-
 
     // Modo online
     @GetMapping("/online/{genre}")

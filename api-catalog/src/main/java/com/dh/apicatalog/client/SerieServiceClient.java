@@ -22,6 +22,8 @@ public interface SerieServiceClient {
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     class SerieDTO {
 
         private String id;
