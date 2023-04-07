@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "ab22b801-b3c0-4f2b-98fd-1a97f550c0f0",
+		"name": "ParcialBackend1Especializacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18756943"
+	},
+	"item": [
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Get Movies from  catalog online",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/catalog/online/Ciencia Ficcion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"online",
+								"Ciencia Ficcion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movies from  catalog offline",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/catalog/offline/Accion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"offline",
+								"Accion"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "Save movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tomb Raider\",\r\n    \"genre\": \"Accion\",\r\n    \"urlStream\": \"www.paramount.com\"\r\n}\r\n    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/movies/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Serie",
+			"item": [
+				{
+					"name": "Save serie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Sweet Tooth\",\r\n        \"genre\": \"Accion\",\r\n        \"seasons\": [\r\n            {\r\n                \"seasonNumber\": 1,\r\n                \"chapters\": [\r\n                    {\r\n                        \"name\": \"Chapter 1\",\r\n                        \"number\": 1,\r\n                        \"urlStream\": \"www.netflix.com/series/Comedia/1/season/1/chapter/1\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Chapter 2\",\r\n                        \"number\": 2,\r\n                        \"urlStream\": \"www.netflix.com/series/Comedia/1/season/1/chapter/2\"\r\n                    }\r\n                ]\r\n            },\r\n            {\r\n                \"seasonNumber\": 2,\r\n                \"chapters\": [\r\n                    {\r\n                        \"name\": \"Chapter 1\",\r\n                        \"number\": 1,\r\n                        \"urlStream\": \"www.netflix.com/series/Comedia/1/season/2/chapter/1\"\r\n                    },\r\n                    {\r\n                        \"name\": \"Chapter 2\",\r\n                        \"number\": 2,\r\n                        \"urlStream\": \"www.netflix.com/series/Comedia/1/season/2/chapter/2\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v1/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Series",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v1/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"series"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
