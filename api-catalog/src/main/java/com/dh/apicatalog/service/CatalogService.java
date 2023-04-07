@@ -10,11 +10,14 @@ import com.dh.apicatalog.client.MovieServiceClient;
 import com.dh.apicatalog.client.SerieServiceClient;
 import com.dh.apicatalog.controller.dto.OnlineCatalogDTO;
 import com.dh.apicatalog.controller.dto.OfflineCatalogDTO;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CatalogService {
@@ -29,7 +32,10 @@ public class CatalogService {
     MovieRepository movieRepository;
 
     // Modo online
+    @CircuitBreaker(name = "showCatalog", fallbackMethod = "showCatalogFallBack")
+    @Retry(name = "retryCatalog")
     public OnlineCatalogDTO getCatalogByGenreOnline(String genre) {
+    //public Optional<T> getCatalogByGenreOnline(String genre) {
         List<MovieServiceClient.MovieDTO> moviesResponse = movieServiceClient.getMovieByGenre(genre);
         List<SerieServiceClient.SerieDTO> seriesResponse = serieServiceClient.getSerieByGenre(genre);
         OnlineCatalogDTO catalog = new OnlineCatalogDTO();
@@ -37,6 +43,23 @@ public class CatalogService {
         catalog.setMovies(moviesResponse);
         catalog.setSeries(seriesResponse);
         return catalog;
+    }
+
+//    public OnlineCatalogDTO showCatalogFallBack(String genre, Throwable t) throws Exception{
+//        throw new Exception("Some service is not working");
+//    }
+
+
+    public OnlineCatalogDTO showCatalogFallBack(String genre, Throwable t) {
+        //throw new CardException(MessageError.CUSTOMER_SERVICE_UNAVAILABLE);
+        OnlineCatalogDTO onlineCatalogDTO = new OnlineCatalogDTO();
+        OfflineCatalogDTO offlineCatalogDTO = new OfflineCatalogDTO();
+        BeanUtils.copyProperties(offlineCatalogDTO, onlineCatalogDTO);
+        //offlineCatalogDTO = getCatalogByGenreOffline(genre);
+        //onlineCatalogDTO.setGenre(genre);
+        //onlineCatalogDTO.setMovies((MovieServiceClient.MovieDTO)offlineCatalogDTO.getMovies());
+        //onlineCatalogDTO.setSeries(offlineCatalogDTO.getSeries());
+        return onlineCatalogDTO;
     }
 
     // Modo offline

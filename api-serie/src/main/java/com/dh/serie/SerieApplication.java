@@ -19,7 +19,7 @@ public class SerieApplication {
 		SpringApplication.run(SerieApplication.class, args);
 	}
 
-/*	@Bean
+	@Bean
 	public CommandLineRunner loadData(SerieRepository repository) {
 		String baseUrl = "www.netflix.com/series";
 
@@ -66,6 +66,6 @@ public class SerieApplication {
 			repository.save(serieB);
 
 		};
-	}*/
+	}
 
 }
