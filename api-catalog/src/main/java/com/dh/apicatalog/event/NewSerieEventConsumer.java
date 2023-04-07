@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class NewSerieEventConsumer {
     @Autowired
     private CatalogService catalogService;
@@ -21,7 +23,8 @@ public class NewSerieEventConsumer {
     //subscription to message queue
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NEW_SERIE)
     public void listenNewSerieEvent(NewSerieEventConsumer.MessageSerie message) {
-        System.out.println("We have a notification of a new serie with genre : " + message.genre);
+        log.info("There is a notification of a NEW SERIE with genre : " + message.genre);
+        //System.out.println("We have a notification of a new serie with genre : " + message.genre);
         catalogService.createSerie(message);
     }
 

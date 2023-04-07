@@ -33,8 +33,8 @@ class CatalogControllerTest {
                 .contentType(ContentType.JSON)
                 .when()
                 .body(new SerieServiceClient.SerieDTO(null, "Star Wars", "Ciencia Ficcion", null))
-                .post("/api/v1/series/save")
-                .as(Map.class);
+                .post("/api/v1/series");
+                //.as(Map.class);
 
         TimeUnit.SECONDS.sleep(10);
 
