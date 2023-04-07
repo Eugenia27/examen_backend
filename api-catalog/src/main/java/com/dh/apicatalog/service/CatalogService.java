@@ -17,11 +17,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.DataInput;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CatalogService {
@@ -39,7 +36,6 @@ public class CatalogService {
     @CircuitBreaker(name = "showCatalog", fallbackMethod = "showCatalogFallBack")
     @Retry(name = "retryCatalog")
     public OnlineCatalogDTO getCatalogByGenreOnline(String genre) {
-    //public Optional<T> getCatalogByGenreOnline(String genre) {
         List<MovieServiceClient.MovieDTO> moviesResponse = movieServiceClient.getMovieByGenre(genre);
         List<SerieServiceClient.SerieDTO> seriesResponse = serieServiceClient.getSerieByGenre(genre);
         OnlineCatalogDTO catalog = new OnlineCatalogDTO();
@@ -53,28 +49,13 @@ public class CatalogService {
 //        throw new Exception("Some service is not working");
 //    }
 
-
     public OnlineCatalogDTO showCatalogFallBack(String genre, Throwable t) {
-        //throw new CardException(MessageError.CUSTOMER_SERVICE_UNAVAILABLE);
         OnlineCatalogDTO onlineCatalogDTO = new OnlineCatalogDTO();
-        OfflineCatalogDTO offlineCatalogDTO; //= new OfflineCatalogDTO();
+        OfflineCatalogDTO offlineCatalogDTO;
         offlineCatalogDTO = getCatalogByGenreOffline(genre);
         onlineCatalogDTO.setGenre(genre);
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //List<Serie> series = offlineCatalogDTO.getSeries();
-        //List<SerieServiceClient.SerieDTO> seriesDTO = new ArrayList<SerieServiceClient.SerieDTO>();
-        //seriesDTO = convertSerieToSerieDto(offlineCatalogDTO.getSeries());
         onlineCatalogDTO.setSeries(convertSerieToSerieDTO(offlineCatalogDTO.getSeries()));
         onlineCatalogDTO.setMovies(convertMovieToMovieDTO(offlineCatalogDTO.getMovies()));
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //onlineCatalogDTO.setMovies((MovieServiceClient.MovieDTO)offlineCatalogDTO.getMovies());
-        //List<Serie> series = offlineCatalogDTO.getSeries();
-        //List<SerieServiceClient.SerieDTO> seriesDTO = new ArrayList<SerieServiceClient.SerieDTO>();
-        //for ();
-
-        //objectMapper.readValue(series, SerieServiceClient.SerieDTO.class);
-        //onlineCatalogDTO.setSeries();
-        BeanUtils.copyProperties(offlineCatalogDTO, onlineCatalogDTO);
         return onlineCatalogDTO;
     }
 
