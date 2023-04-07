@@ -31,4 +31,4 @@ api-catalog posee dos métodos para exponer películas y series por genéro
 --- 
 ## Test
 Existe un test del ciclo completo en que se crea una serie y una película con un género inexistente en la base de datos, desde el controller de catalog y se prueban los métodos online y offline del nuevo género almacenado
-A su vez, en api-catalo, se pueden visualizar los losg de los mensajes asincrónicos, tanto de nueva película y nueva serie, bajo el nuevo género
+A su vez, en api-catalog, se pueden visualizar los logs de los mensajes asincrónicos, tanto de nueva película y nueva serie, bajo el nuevo género
