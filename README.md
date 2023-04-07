@@ -2,7 +2,7 @@
 
 ## Para correr docker
 ```bash
-$ cd docker-compose up
+$ cd docker
 $ docker-compose up
 ```
 ---
