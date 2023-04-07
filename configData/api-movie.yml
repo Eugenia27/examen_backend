@@ -5,11 +5,18 @@ server:
 spring:
   application:
     name: api-movie
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
+  zipkin:
+    baseUrl: http://localhost:9411/
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3308/movie-dev?createDatabaseIfNotExist=true&useUnicode=true&amp&characterEncoding=utf-8&autoReconnect=true
-    username: usr-movie
-    password: pwd-movie
+    username: usr
+    password: pwd
   jpa:
     properties:
       hibernate:

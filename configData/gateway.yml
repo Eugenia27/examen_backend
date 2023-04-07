@@ -16,6 +16,19 @@ spring:
             - Path=/api/v1/catalog/**
           filters:
             - StripPrefix=3
+        - id: id-api-serie
+          uri: lb://api-serie
+          predicates:
+            - Path=/api/v1/series/**
+          #filters:
+          #  - StripPrefix=3
+        - id: id-api-movie
+          uri: lb://api-movie
+          predicates:
+            - Path=/api/v1/movies/**
+          #filters:
+          #  - StripPrefix=3
+
 
 info:
   app:
